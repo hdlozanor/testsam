@@ -12,5 +12,5 @@ phases:
       - sam build
   post_build:
     commands:
-      - sam package --s3-bucket your-s3-bucket-name --output-template-file packaged.yaml
+      - sam package --s3-bucket artifactstest2024 --output-template-file packaged.yaml
       - sam deploy --template-file packaged.yaml --stack-name my-sam-app --capabilities CAPABILITY_IAM
