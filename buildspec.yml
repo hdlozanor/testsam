@@ -8,7 +8,7 @@ phases:
       - pip install aws-sam-cli
       - pip install -r src/handlers/crud_plantilla/requirements.txt
       - pip install -r src/handlers/crud_tipo_plantilla/requirements.txt
-      - pip install -r src/handlers/health/requirements.txt
+      # - pip install -r src/handlers/health/requirements.txt
   pre_build:
     commands:
       - |
