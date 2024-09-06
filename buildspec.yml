@@ -9,22 +9,13 @@ phases:
       - pip install -r src/handlers/crud_plantilla/requirements.txt
       - pip install -r src/handlers/crud_tipo_plantilla/requirements.txt
       # - pip install -r src/handlers/health/requirements.txt
-  pre_build:
-    commands:
-      - |
-        BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[?starts_with(Name, 'my-sam-artifacts')].Name" --output text)
-        if [ -z "$BUCKET_NAME" ]; then
-          BUCKET_NAME="my-sam-artifacts-$(date +%s)"
-          aws s3 mb s3://$BUCKET_NAME
-        fi
-      - export S3_BUCKET=$BUCKET_NAME
   build:
     commands:
       - sam build --config-file samconfig.toml
 
   post_build:
     commands:
-      - sam package --config-file samconfig.toml --s3-bucket $S3_BUCKET --output-template-file packaged.yaml
+      - sam package --config-file samconfig.toml --output-template-file packaged.yaml
       # Desplegar el proyecto SAM
       - sam deploy --config-file samconfig.toml --no-confirm-changeset
 
